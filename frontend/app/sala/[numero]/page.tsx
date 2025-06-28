@@ -1,46 +1,25 @@
 'use client'
 
-import { useRouter, useParams } from 'next/navigation'
-import { useState } from 'react'
-import { responderDesafio } from '../../hooks/useResponder'
+import { useProgress } from '@/app/hooks/useProgress'
+import FirstRoom from '@/app/components/FirstRoom'
+import SecondRoom from '@/app/components/SecondRoom'
+import ThirdComponent from '@/app/components/ThirdComponent'
 
 export default function SalaPageClient() {
-  const router = useRouter()
-  const { numero } = useParams()
-const numeroInt = parseInt(numero as string)
-  const [resposta, setResposta] = useState('')
-  const [feedback, setFeedback] = useState('')
-  const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null
+  const progress = useProgress();
 
-  const handleSend = async () => {
-    console.log('Enviando resposta:', { userId, sala: numero, resposta })
-    if (!userId) return
-    const result = await responderDesafio(userId, numeroInt,  resposta)
-    if (!result.autorizado) {
-      setFeedback('Acesso negado.')
-    } else if (result.correta) {
-      router.push(numeroInt === 3 ? '/sucesso' : `/sala/${numeroInt + 1}`)
-    } else {
-      setFeedback('Resposta incorreta. Tente novamente.')
-    }
+  if (progress && progress.salaAtual) {
+    console.log('Progresso:', progress);
   }
 
-  return (
-    <div className="p-8 max-w-xl mx-auto">
-      <h1 className="text-2xl mb-4">Sala {numeroInt}</h1>
-      <div className="flex flex-col gap-4">
-        <input
-          type="text"
-          className="border p-2 rounded"
-          placeholder="Digite sua resposta"
-          value={resposta}
-          onChange={(e) => setResposta(e.target.value)}
-        />
-        <button type="button" className="bg-blue-600 text-white px-4 py-2 rounded" onClick={() => handleSend()}>
-          Enviar
-        </button>
-        {feedback && <p className="text-sm text-red-500">{feedback}</p>}
-      </div>
-    </div>
-  )
+  switch(progress?.salaAtual) {
+    case 1:
+      return <FirstRoom />
+    case 2:      
+      return <SecondRoom />
+    case 3:      
+      return <ThirdComponent />
+    default:
+      console.log('Sala desconhecida');
+  }
 }

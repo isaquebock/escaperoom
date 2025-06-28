@@ -1,20 +1,20 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { useState } from 'react'
-import { responderDesafio } from '../../hooks/useResponder'
+import { responderDesafio } from '@/app/hooks/useResponder'
 
-export default function SalaPageClient({ numero }: { numero: string }) {
+export default function FirstRoom() {
   const router = useRouter()
-  const numeroInt = parseInt(numero)
+  const { numero } = useParams()
+  const numeroInt = parseInt(numero as string)
   const [resposta, setResposta] = useState('')
   const [feedback, setFeedback] = useState('')
   const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null
 
   const handleSend = async () => {
-    console.log('Enviando resposta:', { userId, sala: numeroInt, resposta })
-    if (!userId) return
-    const result = await responderDesafio(userId, numeroInt, resposta)
+    if (!userId) return;
+    const result = await responderDesafio(userId, numeroInt,  resposta)
     if (!result.autorizado) {
       setFeedback('Acesso negado.')
     } else if (result.correta) {
@@ -26,7 +26,6 @@ export default function SalaPageClient({ numero }: { numero: string }) {
 
   return (
     <div className="p-8 max-w-xl mx-auto">
-      <h1 className="text-2xl mb-4">Sala {numeroInt}</h1>
       <div className="flex flex-col gap-4">
         <input
           type="text"

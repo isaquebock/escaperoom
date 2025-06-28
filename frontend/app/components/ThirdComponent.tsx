@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { responderDesafio } from '../../hooks/useResponder'
+import { responderDesafio } from '@/app/hooks/useResponder'
 import { useRouter } from 'next/navigation'
 
 export default function Sala3() {

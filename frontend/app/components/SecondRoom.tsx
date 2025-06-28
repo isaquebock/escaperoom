@@ -1,12 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { responderDesafio } from '../../hooks/useResponder'
+import { responderDesafio } from '@/app/hooks/useResponder'
 import { useRouter } from 'next/navigation'
 
-const CORES = ['AZUL', 'VERMELHO', 'AMARELO']
+const CORES = ['ROSA', 'AZUL', 'VERDE']
 
-export default function Sala2() {
+export default function SecondRoom() {
   const [resposta, setResposta] = useState('')
   const [feedback, setFeedback] = useState('')
   const [mostrarCores, setMostrarCores] = useState(true)
