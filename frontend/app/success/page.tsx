@@ -1,10 +1,8 @@
 'use client'
 
-import { useProgress } from '@/app/hooks/useProgress'
 import { useRouter } from 'next/navigation'
 
 export default function SucessoPage() {
-  const progress = useProgress();
   const router = useRouter()
 
   const handleRestart = () => {
@@ -12,12 +10,8 @@ export default function SucessoPage() {
     router.replace('/')
   }
 
-  if (progress && progress.salaAtual) {
-    console.log('Progresso:', progress);
-  }
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-green-50">
+    <div className="flex flex-col items-center justify-center min-h-screen ">
       <div className="bg-white shadow-lg rounded-lg p-10 flex flex-col items-center">
         <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="green" strokeWidth="2" className="mb-4">
           <circle cx="12" cy="12" r="10" stroke="green" strokeWidth="2" fill="#d1fae5" />

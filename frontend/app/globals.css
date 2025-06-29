@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-jersey15: 'Jersey 15', cursive;
 }
 
 @theme inline {
@@ -24,3 +25,24 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.font-jersey15 {
+  font-family: var(--font-jersey15), cursive;
+}
+
+@keyframes bounce-smooth {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-24px);
+  }
+}
+
+.animate-bounce-smooth {
+  animation: bounce-smooth 2.5s ease-in-out infinite;
+}
+
+
+
+

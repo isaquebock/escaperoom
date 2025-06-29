@@ -5,21 +5,20 @@ import FirstRoom from '@/app/components/FirstRoom'
 import SecondRoom from '@/app/components/SecondRoom'
 import ThirdComponent from '@/app/components/ThirdComponent'
 
-export default function SalaPageClient() {
+const roomComponents: Record<number, React.ComponentType> = {
+  1: FirstRoom,
+  2: SecondRoom,
+  3: ThirdComponent,
+}
+
+export default function Page() {
   const progress = useProgress();
 
-  if (progress && progress.salaAtual) {
-    console.log('Progresso:', progress);
+  const RoomComponent = progress?.salaAtual ? roomComponents[progress.salaAtual] : undefined;
+
+  if (RoomComponent) {
+    return <RoomComponent />;
   }
 
-  switch(progress?.salaAtual) {
-    case 1:
-      return <FirstRoom />
-    case 2:      
-      return <SecondRoom />
-    case 3:      
-      return <ThirdComponent />
-    default:
-      console.log('Sala desconhecida');
-  }
+  return <p>Erro ao carregar a página</p>;
 }

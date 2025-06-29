@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Jersey_15 } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jersey15 = Jersey_15({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: "400", // Jersey 15 only has 400
+  variable: "--font-jersey15",
 });
 
 export const metadata: Metadata = {
@@ -24,10 +20,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      <body className={`${jersey15.variable} font-jersey15 antialiased min-h-screen`} 
+            style={{
+              backgroundImage: "url('/images/background.png')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
       >
         {children}
+        <div className="absolute inset-0 bg-black/70 -z-10" />
       </body>
     </html>
   );

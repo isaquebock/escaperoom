@@ -12,8 +12,8 @@ export async function obterProgresso(userId: string) {
 
 const respostas: Record<number, string> = {
   1: "32",
-  2: "AZULVERMELHOAMARELO",
-  3: "TESOURO",
+  2: "SERRA",
+  3: "SERRAR",
 };
 
 export async function responderDesafio(userId: string, sala: number, resposta: string) {
