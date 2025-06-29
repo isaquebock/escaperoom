@@ -20,11 +20,11 @@ export function useProgress(): Progresso {
 
       try {
         if (localId) {
-          const res = await api.get(`/progresso/${localId}`)
+          const res = await api.get(`/progress/${localId}`)
           setUserId(localId)
           setSalaAtual(res.data.salaAtual)
         } else {
-          const res = await api.post('/iniciar')
+          const res = await api.post('/start')
           localId = res.data.userId
           localStorage.setItem('userId', localId as string)
           setUserId(localId)
@@ -32,6 +32,7 @@ export function useProgress(): Progresso {
         }
       } catch (err) {
         console.error('Erro ao buscar/iniciar progresso:', err)
+
         setUserId(null)
         setSalaAtual(null)
       } finally {

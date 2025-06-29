@@ -1,32 +1,36 @@
 import { PrismaClient } from "@prisma/client";
+import type { User } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
-export async function iniciarSessao() {
-  return await prisma.user.create({ data: { salaAtual: 1 } });
-}
-
-export async function obterProgresso(userId: string) {
-    if (!userId) return null;
-    return await prisma.user.findUnique({ where: { id: userId } });
-}
-
-const respostas: Record<number, string> = {
+const awnsers: Record<number, string> = {
   1: "32",
   2: "SERRA",
   3: "SERRAR",
 };
 
-export async function responderDesafio(userId: string, sala: number, resposta: string) {
-  const user = await prisma.user.findUnique({ where: { id: userId } });
-  if (!user || user.salaAtual !== sala) return { autorizado: false };
+export async function startSession(): Promise<User> {
+  return await prisma.user.create({ data: { salaAtual: 1 } });
+}
 
-  const correta = resposta.toUpperCase() === respostas[sala];
-  if (!correta) return { autorizado: true, correta: false };
+export async function getProgressFromPrisma(userId: string): Promise<User | null> {
+    if (!userId) return null;
+    return await prisma.user.findUnique({ where: { id: userId } });
+}
+
+export async function respondChallenge(userId: string, room: number, awnser: string): Promise<RespondChallengeResult> {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user || user.salaAtual !== room) return { authorized: false };
+
+  const rightAwnser = awnser.toUpperCase() === awnsers[room];
+
+  if (!rightAwnser) 
+    return { authorized: true, rightAwnser: false };
 
   await prisma.user.update({
     where: { id: userId },
-    data: { salaAtual: sala + 1 },
+    data: { salaAtual: room + 1 },
   });
 
-  return { autorizado: true, correta: true };
+  return { authorized: true, rightAwnser: true };
 }

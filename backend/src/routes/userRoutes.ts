@@ -1,23 +1,24 @@
 import { Router, Request, Response } from "express";
 import {
-  iniciarSessao,
-  obterProgresso,
-  responderDesafio,
+  startSession,
+  getProgressFromPrisma,
+  respondChallenge,
 } from "../services/userService";
 
 const router = Router();
 
+// Health check route to docker-compose
 router.get('/', (_, res) => {
-  res.status(200).send('OK')
+  res.status(200).send('Healthy Check')
 })
 
-router.post("/iniciar", async (req: Request, res: Response) => {
-  const user = await iniciarSessao();
+router.post("/start", async (req: Request, res: Response) => {
+  const user = await startSession();
   res.json({ userId: user.id });
 });
 
-router.get("/progresso/:userId", async (req: Request, res: Response) => {
-  const user = await obterProgresso(req.params.userId);
+router.get("/progress/:userId", async (req: Request, res: Response) => {
+  const user = await getProgressFromPrisma(req.params.userId);
   if (!user) {
     res.status(404).json({ erro: "Usuário não encontrado" });
     return;
@@ -26,15 +27,15 @@ router.get("/progresso/:userId", async (req: Request, res: Response) => {
   res.json({ salaAtual: user.salaAtual });
 });
 
-router.post("/responder", async (req: Request, res: Response) => {
+router.post("/respond", async (req: Request, res: Response) => {
   const { userId, sala, resposta } = req.body;
-  const resultado = await responderDesafio(userId, sala, resposta);
-  if (!resultado.autorizado) {
+  const result = await respondChallenge(userId, sala, resposta);
+  if (!result.authorized) {
     res.status(403).json({ erro: "Acesso negado" });
     return;
   }
 
-  res.json(resultado);
+  res.json(result);
 });
 
 export default router;
