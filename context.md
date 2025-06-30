@@ -1,24 +1,38 @@
-📄 Instruções para o GitHub Copilot (Contexto do Projeto)
+🧪 Teste Técnico Fullstack – Escape Room Web 🗝️
+🎯 Objetivo
+Desenvolver uma aplicação web no estilo Escape Room, composta por três etapas (ou salas). Em cada etapa, o usuário deve resolver um desafio diferente para avançar. Ao concluir as três etapas, o usuário "escapa" com sucesso.
 
-🧠 Sobre mim e o projeto
+🔐 Regras
+A aplicação deve conter exatamente 3 salas sequenciais.
+Cada sala deve apresentar um desafio único e distinto, que deve ser resolvido para liberar a próxima.
+Não é permitido pular etapas — o progresso deve ser controlado e validado.
+Ao completar todas as etapas, o sistema deve exibir uma mensagem de sucesso final.
 
-Estou desenvolvendo uma aplicação web no estilo Escape Room, usando Next.js (App Router) no frontend e Node.js com Express e Prisma no backend. A aplicação possui três salas sequenciais, cada uma com um desafio único que o usuário deve resolver para avançar.
 
-No frontend, utilizo Client-Side Rendering (CSR), boas práticas de clean code, Tailwind CSS (ou shadcn/ui) para o design, hooks customizados e uma estrutura modular de pastas (components, features, hooks, services, etc.). Uso tipagem forte com TypeScript.
 
-No backend, estou usando Prisma com SQLite para persistência local (com possibilidade de escalar para PostgreSQL). As regras de negócio e controle de progresso estão centralizadas na API. O backend valida as respostas e impede pulo de etapas.
+🧱 Requisitos Técnicos
+Frontend
+Aplicação com React (preferencial) ou outro framework moderno
+Navegação clara entre as salas
+Interface imersiva e intuitiva
+Backend
+Utilizar Node.js com o framework de sua preferência para criar a API para validar as respostas dos desafios
+Deve ter alguma forma de controle de progresso
+Deve ter algum tipo de Persistência
 
-✅ Minhas preferências
-	•	Prefiro código limpo, modular e reutilizável, com separação clara de responsabilidades.
-	•	Gosto que funções, hooks e componentes tenham nomes descritivos e coesos.
-	•	Evito lógica inline ou componentes excessivamente grandes.
-	•	Estruturo código com foco em legibilidade, mantendo o mínimo necessário por arquivo.
-	•	Priorize React moderno com useEffect, useState, useRouter e boas práticas da App Router.
 
-✍️ Como você deve responder
-	•	Sugira código baseado nas melhores práticas de Next.js + React.
-	•	Sempre que possível, separe lógica em hooks ou serviços externos.
-	•	Use Tailwind CSS de forma semântica e enxuta (sem classes repetitivas).
-	•	Inclua comentários breves e úteis apenas quando necessário.
-	•	Se estiver lidando com formulários ou requisições, use axios e trate erros com elegância.
-	•	Nunca sugira jQuery, any em TypeScript ou práticas ultrapassadas.
+
+✅ Avaliação
+Organização e clareza do código
+Boas práticas de integração entre frontend e backend
+Qualidade dos desafios propostos (variedade, lógica, execução)
+UX fluida e intuitiva
+Criatividade e acabamento geral
+
+
+
+⏳ Tempo estimado
+Uma semana (aproximadamente)
+
+🚀 Entrega
+Link do repositório com instruções claras de execução
